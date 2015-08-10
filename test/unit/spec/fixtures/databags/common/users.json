@@ -1,0 +1,24 @@
+{
+  "id": "users",
+  "newuser1": {
+    "sudo": {
+
+    },
+    "node_tags": ["web", "marketing"]
+  },
+  "newuser2": {
+    "sudo": {
+      "node_tags": ["inventory"]
+    },
+    "node_tags": ["web", "marketing", "inventory"]
+  },
+  "newuser3": {
+    "sudo": {
+
+    },
+    "node_tags": ["inventory"]
+  },  
+  "olduser": {
+    "node_tags": ["oldtag"]
+  }
+}

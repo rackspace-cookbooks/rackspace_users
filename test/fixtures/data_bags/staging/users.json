@@ -1,0 +1,27 @@
+{
+  "id": "users",
+  "testuser": {
+    "encrypted_data": "LXHZqwtJ+LiYgBoz9KSjWh0NTgwDVsbn2CkEw6SwG0s=\n",
+    "iv": "Gs8HpXm/oStnTwsDBmvH2g==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "newuser1": {
+    "encrypted_data": "QHWpnNJ3wFZuucx3emz1XD2nqu91pP4qSNh1y4eB5BI=\n",
+    "iv": "uAWd0u7bHO1w0V7llRp87w==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "newuser2": {
+    "encrypted_data": "LFLxqkZVjGEPenRUUeGRgYzBXKDItDh2HdU+1k467sYwtlGtiZaDfGltr9M0\nkWCzktIQ08P4npBGy+EOsMN1cfYPd68x4RsXe6To/v4QD8R86XNfSZAY/MLy\nLTy9c78p8SIz2PscVpPeJDUJ314a3DmiRAVho+QVSrXW8rhbO8OOiPyRP39h\nywRALFsGR95OVM+RjaMu7QZXGFKP3SJfJqqMFHQeXBF5h6D9F1ihHMCZrQA4\nTu66aE4DeEGMr++5nVh4Tt427Zdkw3ZhEhXh72g014qG0qhcxq+Yye5pCp5F\nHzztZWxGRQakNFV7H6Us4gpHm7IRUN/xU/gckXBrqC/YY2IlUw31xV234B+O\n8vb87SbXkJD9/3ESA/CiPNZPEZujyS7E+WCO5Q5VYIL2G4ZgeD0cjq3fN6vU\nKpYnDlZGwese+gz7WHrliV/WHM/+63NAlTb2AxbuFc79KbK1coIf+lMDiHTD\n2tMep7whXivvN4Kc8GkrzRmWUSAiXs9Wz6wOFO3TOzTTt8p9380ptSdtVMhq\nElZuIl2gphLQqgMkjDKGvhfWfKhdi03h3zEB5v9DUE9jaePg5B9gtuK5kcqs\nfvNbfQSHo/Yeg/TmIg6jEfmE9aUO+V7tcLveW8EHAPjhmFSERz5zEecRMFyA\nDA24qUo7VkFMJACtehivMdT6clZgAeJpTxJBjRX8YXUgpi5JAQzWtSmF6KFx\npNCalg==\n",
+    "iv": "+hmFFErybJTqjBjKzB9xBw==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "olduser": {
+    "encrypted_data": "A8MvvPSvIZDwzIWkV4qDRwJg4SSPiUNFWEfJKTlSFH6rdYrXxeb1Smh1ymqe\nGvLX\n",
+    "iv": "WuOsTB1KET7WnpJMCv0cqg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}
