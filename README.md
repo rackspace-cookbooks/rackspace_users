@@ -14,7 +14,7 @@ A cookbook to manage users from a data bag.
 
 * `node['rackspace_users']['data_bag']` : Which data bag contains the item with user records. Defaults to `node.chef_environment`
 * `node['rackspace_users']['data_bag_item']` : The item that holds the user records. Defaults to `users`
-* `node['rackspace_users']['node_tags']` : Array of tags declared by the node calling the recipe. These are used to create users on specific nodes. Defaults to `[]` (empty array).
+* `node['rackspace_users']['node_tags']` : Array of tags declared by the node calling the recipe. These are used to create users and grant sudo on specific nodes. Defaults to `[]` (empty array).
 
 ## Usage
 
@@ -32,7 +32,7 @@ include_recipe 'rackspace_users'
  * Handle account/password expiry information. Leverages the `user_shadow` resource https://supermarket.chef.io/cookbooks/user_shadow
  * Handle "sudo as root" entries. Leverages the `sudo` resource https://supermarket.chef.io/cookbooks/sudo
  * Add user to groups
- * Provides a method of adding users only on specific nodes via tags
+ * Provides a method of adding users and grant sudo only on specific nodes via tags
 
 ### Overview
 
