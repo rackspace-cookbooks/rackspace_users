@@ -67,7 +67,7 @@ users.each do |username, user_data|
   user_node_tags = user_data['node_tags'] || []
   all_groups = user_groups | (user_node_tags & node_tags)
 
-  next if all_groups.nil? || user_data['action'] == 'remove'
+  next if all_groups.empty? || user_data['action'] == 'remove'
 
   all_groups.each do |groupname|
     groups[groupname] = [] unless groups[groupname]
