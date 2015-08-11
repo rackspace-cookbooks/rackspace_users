@@ -93,6 +93,9 @@ shared_examples_for 'users override' do
   describe user('newuser1') do
     it { should exist }
     it { should belong_to_group 'newuser1' }
+    it { should belong_to_group 'web' }
+    it { should belong_to_group 'marketing' }
+    it { should belong_to_group 'facilities' }
   end
 
   describe file('/etc/sudoers.d/newuser1') do
@@ -104,6 +107,9 @@ shared_examples_for 'users override' do
   describe user('newuser2') do
     it { should exist }
     it { should belong_to_group 'newuser2' }
+    it { should belong_to_group 'web' }
+    it { should belong_to_group 'marketing' }
+    it { should belong_to_group 'facilities' }
   end
 
   describe file('/etc/sudoers.d/newuser2') do
@@ -112,6 +118,16 @@ shared_examples_for 'users override' do
 
   # newuser3
   describe user('newuser3') do
+    it { should_not exist }
+  end
+
+  # Groups
+  %w(web marketing facilities).each do |group|
+    describe group(group) do
+      it { should exist }
+    end
+  end
+  describe group('inventory') do
     it { should_not exist }
   end
 end
