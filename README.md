@@ -12,7 +12,7 @@ A cookbook to manage users from a data bag.
 
 ## Attributes
 
-* `node['rackspace_users']['data_bag']` : Which data bag contains the `users` item. Defaults to `node.chef_environment`
+* `node['rackspace_users']['data_bag']` : Which data bag contains the item with user records. Defaults to `node.chef_environment`
 * `node['rackspace_users']['data_bag_item']` : The item that holds the user records. Defaults to `users`
 * `node['rackspace_users']['node_tags']` : Array of tags declared by the node calling the recipe. These are used to create users on specific nodes. Defaults to `[]` (empty array).
 
