@@ -153,3 +153,53 @@ And then on the data bag the user can subscribe to one of the tags like:
 }
 ```
 The recipe also creates OS groups named after the tags that the user subscribes and are found in the tags that the node declares. In the case above, the `admin` group will be created and the `newuser` will be granted membership on it. It is worth emphasizing that tags is an optional feature: if the node and user don't use them then the user will simply be created on all nodes consuming the recipe.
+
+#### Sudo
+
+'Sudo as root' can simply be added by adding an empty `sudo` section:
+```
+{
+  "id": "users",
+  "newuser": {
+    "sudo": {}
+  }
+}
+```
+This will add a `/etc/sudoers.d/newuser` file with privileges allowing the user to execute any command as root. The user will have to enter their password. The recipe uses the `sudo` resource and some features of that can be overwritten, namely `nopasswd`, `commands` and `defaults`. For example:
+```
+{
+  "id": "users",
+  "newuser": {
+    "sudo": {
+      "nopasswd": true,
+      "commands": [
+        "/etc/init.d/httpd restart",
+        "/sbin/iptables"
+      ],
+      "defaults": [
+        "!requiretty",
+        "env_reset"
+      ]
+    }
+  }
+}
+```
+If there is no `sudo` section, a sudo entry will not be added for that user. Sudo creation can be controlled even further by again using tags. If the `sudo` section has a `node_tags` sub section then that will be compared against the tags the node declares. If no common tags are found then a sudo entry will not be added. For example:
+```
+{
+  "id": "users",
+  "newuser": {
+    "sudo": {
+      "node_tags": ["web","admin"]
+    }
+  }
+}
+```
+
+#### Using a different data bag
+You can point to a different data bag and item by overwriting the corresponding attributes in the consuming cookbook, for example:
+```
+# override default data bag and item
+node.default['rackspace_users']['data_bag'] = 'my_data_bag'
+node.default['rackspace_users']['data_bag_item'] = 'my_users'
+```
