@@ -150,7 +150,9 @@ And then on the data bag the user can subscribe to one of the tags like:
   }
 }
 ```
-The recipe also creates OS groups named after the tags that the user subscribes and are found in the tags that the node declares. In the case above, the `admin` group will be created and the `newuser` will be granted membership on it. It is worth emphasizing that tags is an optional feature: if the node and user don't use them then the user will simply be created on all nodes consuming the recipe.
+The recipe also creates OS groups named after the tags that the user subscribes and are found in the tags that the node declares. In the case above, the `admin` group will be created and the `newuser` will be granted membership on it. These groups can be used in the future to grant privileges based on these tags if desired.
+
+It is worth emphasizing that tags are an optional feature: if the node and user don't leverage them then the user will simply be created on all nodes consuming the recipe.
 
 #### Sudo
 
