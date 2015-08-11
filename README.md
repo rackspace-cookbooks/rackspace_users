@@ -2,7 +2,7 @@
 
 # rackspace_users
 
-A cookbook to manage users from a data bag.
+A cookbook to manage users from an encrypted data bag.
 
 ## Supported Platforms
 
@@ -18,7 +18,7 @@ A cookbook to manage users from a data bag.
 
 ## Usage
 
-The recipe reads the users from a data bag item. By default, looks for a data bag named after the environment and an item called `users`. This can be overwritten in the consuming cookbook.
+The recipe reads the users from an *encrypted* data bag item. By default, looks for a data bag named after the environment and an item called `users`. This can be overwritten in the consuming cookbook.
 After you define the users in the data bag, place a dependency on the rackspace_users cookbook in your cookbook's metadata.rb:
 ```
 depends 'rackspace_users'
@@ -136,9 +136,13 @@ Password/account expiry information is set by adding attributes in the data bag 
 }
 ```
 #### Tags
-User creation on nodes can be controlled by declaring a list of tags on the node consuming the recipe and then subscribing the user to at least one of those tags in the data bag. The user will be created on the node if the user subscribes to at least one of the tags the node declares or if the user doesn't use tags at all. Tag declaration on the node can be done like:
+User creation on nodes can be controlled by declaring a list of tags on the node consuming the recipe and then subscribing the user to at least one of those tags in the data bag. The user will be created on the node if the user subscribes to at least one of the tags the node declares or if the user doesn't use tags at all. Tag declaration on the node can be done in the consuming recipe, for example:
 
-```node.default['rackspace_users']['node_tags'] = ['web', 'admin', 'test']```
+```
+node.default['rackspace_users']['node_tags'] = ['web', 'admin', 'test']
+
+include_recipe 'rackspace_users'
+```
 
 And then on the data bag the user can subscribe to one of the tags like:
 
@@ -202,6 +206,8 @@ You can point to a different data bag and item by overwriting the corresponding 
 # override default data bag and item
 node.default['rackspace_users']['data_bag'] = 'my_data_bag'
 node.default['rackspace_users']['data_bag_item'] = 'my_users'
+
+include_recipe 'rackspace_users'
 ```
 
 ## Contributing
