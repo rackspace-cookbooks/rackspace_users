@@ -91,11 +91,9 @@ The basic attribues of a user are named exactly as the parameters used by the `u
 ```
 {
   "id": "users",
-  "users": {
-    "user1": {},
-    "user2": {},
-    "user3": {}
-  }
+  "user1": {},
+  "user2": {},
+  "user3": {}
 }
 ```
 Here is an example with some basic attributes:
