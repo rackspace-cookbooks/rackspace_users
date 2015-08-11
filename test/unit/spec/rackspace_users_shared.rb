@@ -76,15 +76,6 @@ shared_examples_for 'users override' do
     )
   end
 
-  it 'creates groups from node tags' do
-    expect(chef_run).to create_group('web').with(
-      members: ['newuser1', 'newuser2']
-    )
-    expect(chef_run).to create_group('marketing').with(
-      members: ['newuser1', 'newuser2']
-    )
-  end
-
   it 'creates user newuser1 with sudo' do
     expect(chef_run).to create_user_account('newuser1')
     expect(chef_run).to modify_shadow_attributes('newuser1')
@@ -111,5 +102,20 @@ shared_examples_for 'users override' do
     expect(chef_run).to_not modify_shadow_attributes('olduser')
     expect(chef_run).to remove_user_account('olduser')
     expect(chef_run).to remove_sudo('olduser')
+  end
+
+  it 'creates groups from node tags' do
+    expect(chef_run).to create_group('web').with(
+      members: ['newuser1', 'newuser2']
+    )
+    expect(chef_run).to create_group('marketing').with(
+      members: ['newuser1', 'newuser2']
+    )
+  end
+
+  it 'creates additional groups' do
+    expect(chef_run).to create_group('facilities').with(
+      members: ['newuser1', 'newuser2']
+    )
   end
 end

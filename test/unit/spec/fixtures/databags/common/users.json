@@ -4,13 +4,15 @@
     "sudo": {
 
     },
-    "node_tags": ["web", "marketing"]
+    "node_tags": ["web", "marketing"],
+    "groups": ["marketing", "facilities"]
   },
   "newuser2": {
     "sudo": {
       "node_tags": ["inventory"]
     },
-    "node_tags": ["web", "marketing", "inventory"]
+    "node_tags": ["web", "marketing", "inventory"],
+    "groups": ["facilities"]
   },
   "newuser3": {
     "sudo": {
