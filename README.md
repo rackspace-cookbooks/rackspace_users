@@ -199,6 +199,7 @@ If there is no `sudo` section, a sudo entry will not be added for that user. Sud
   }
 }
 ```
+Also note that if the user doesn't declare any tags under the sudo section then it is assumed that it has sudo on all nodes.
 
 #### Using a different data bag
 You can point to a different data bag and item by overwriting the corresponding attributes in the consuming cookbook, for example:
