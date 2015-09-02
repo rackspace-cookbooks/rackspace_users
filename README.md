@@ -121,7 +121,7 @@ Here is an example with some basic attributes:
 The above example also shows the usage of the `groups` array which is a list of OS groups that the user will be granted membership. The group will be created if doesn't exist.
 
 #### Adding a user with password/account expiry information
-Password/account expiry information is set by adding attributes in the data bag named exactly as the parameters used by the `user_resource` resource. Example:
+Password/account expiry information is set by adding attributes in the data bag named exactly as the parameters used by the `user_shadow` resource. Example:
 ```
 {
   "id": "users",
