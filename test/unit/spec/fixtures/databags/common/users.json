@@ -1,26 +1,46 @@
 {
   "id": "users",
+  "testuser": {
+  },
   "newuser1": {
     "sudo": {
 
-    },
-    "node_tags": ["web", "marketing"],
-    "groups": ["marketing", "facilities"]
+    }
   },
   "newuser2": {
+    "comment": "another new user",
+    "uid": 2000,
+    "gid": 2000,
+    "shell": "/bin/dash",
+    "home": "/home/custom_home_directory",
+    "password": "$6$bLZbaeySMzRx7P29$cmmF4SbtnXe2Gc1cBc0fpnBUEPxrr8inn6SNq9xpcT7M/vM0FpZmGF105LWrGCValjJMqEtBALZOYayppwJAj/",
+    "ssh_keygen": true,
+    "ssh_keys": [
+      "key1",
+      "key2"
+    ],
+    "groups": [
+      "newgroup2"
+    ],
+    "sp_lstchg": "2015-07-30",
+    "sp_expire": "2035-09-30",
+    "sp_min": 30,
+    "sp_max": 60,
+    "sp_inact": 5,
+    "sp_warn": 5,
     "sudo": {
-      "node_tags": ["inventory"]
-    },
-    "node_tags": ["web", "marketing", "inventory"],
-    "groups": ["facilities"]
+      "nopasswd": true,
+      "commands": [
+        "/etc/init.d/httpd restart",
+        "/sbin/iptables"
+      ],
+      "defaults": [
+        "!requiretty",
+        "env_reset"
+      ]
+    }
   },
-  "newuser3": {
-    "sudo": {
-
-    },
-    "node_tags": ["inventory"]
-  },  
   "olduser": {
-    "node_tags": ["oldtag"]
+    "action": "remove"
   }
 }

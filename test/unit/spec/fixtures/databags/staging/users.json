@@ -1,46 +1,48 @@
 {
   "id": "users",
-  "testuser": {
-  },
   "newuser1": {
     "sudo": {
 
-    }
-  },
-  "newuser2": {
-    "comment": "another new user",
-    "uid": 2000,
-    "gid": 2000,
-    "shell": "/bin/dash",
-    "home": "/home/custom_home_directory",
-    "password": "$6$bLZbaeySMzRx7P29$cmmF4SbtnXe2Gc1cBc0fpnBUEPxrr8inn6SNq9xpcT7M/vM0FpZmGF105LWrGCValjJMqEtBALZOYayppwJAj/",
-    "ssh_keygen": true,
-    "ssh_keys": [
-      "key1",
-      "key2"
+    },
+    "node_groups": [
+      "web",
+      "marketing",
+      "staging"
     ],
     "groups": [
-      "newgroup2"
-    ],
-    "sp_lstchg": "2015-07-30",
-    "sp_expire": "2035-09-30",
-    "sp_min": 30,
-    "sp_max": 60,
-    "sp_inact": 5,
-    "sp_warn": 5,
+      "marketing",
+      "facilities"
+    ]
+  },
+  "newuser2": {
     "sudo": {
-      "nopasswd": true,
-      "commands": [
-        "/etc/init.d/httpd restart",
-        "/sbin/iptables"
-      ],
-      "defaults": [
-        "!requiretty",
-        "env_reset"
+      "node_groups": [
+        "inventory",
+        "staging"
       ]
-    }
+    },
+    "node_groups": [
+      "web",
+      "marketing",
+      "staging"
+    ],
+    "groups": [
+      "marketing",
+      "facilities"
+    ]
+  },
+  "newuser3": {
+    "sudo": {
+
+    },
+    "node_groups": [
+      "inventory",
+      "production"
+    ]
   },
   "olduser": {
-    "action": "remove"
+    "node_groups": [
+      "oldtag"
+    ]
   }
 }
