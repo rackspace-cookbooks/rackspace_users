@@ -15,14 +15,14 @@ users = Chef::EncryptedDataBagItem.load(
   node['rackspace_users']['data_bag'],
   node['rackspace_users']['data_bag_item']).to_hash.select { |user, user_data| user != 'id' }
 
-node_tags = node['rackspace_users']['node_tags']
+node_groups = node['rackspace_users']['node_groups']
 
 groups = {}
 
 users.each do |username, user_data|
-  ## The action (if defined in the data bag) should be overwritten to 'remove' if the user's node tags and node's tags don't intersect.
-  ## If the user doesn't declare any tags then it is assumed that is present on all nodes.
-  user_data['action'] = 'remove' if user_data['node_tags'] && (user_data['node_tags'] & node_tags).empty?
+  ## The action (if defined in the data bag) should be overwritten to 'remove' if the user's node_groups and node's node_groups don't intersect.
+  ## If the user doesn't declare any node_groups then it is assumed that is present on all nodes.
+  user_data['action'] = 'remove' if user_data['node_groups'] && (user_data['node_groups'] & node_groups).empty?
 
   # ACCOUNT
   user_account username do
@@ -44,10 +44,10 @@ users.each do |username, user_data|
   ## Action will be 'remove' by default.
   sudo_action = :remove
 
-  ## Install sudo if the user is not removed and there is a sudo entry but also take tags into consideration
-  ## If the user doesn't declare any tags under the sudo section then it is assumed that it has sudo on all nodes.
+  ## Install sudo if the user is not removed and there is a sudo entry but also take node_groups into consideration
+  ## If the user doesn't declare any node_groups under the sudo section then it is assumed that it has sudo on all nodes.
   if user_data['sudo'] && user_data['action'] != 'remove'
-    sudo_action = :install unless user_data['sudo']['node_tags'] && (user_data['sudo']['node_tags'] & node_tags).empty?
+    sudo_action = :install unless user_data['sudo']['node_groups'] && (user_data['sudo']['node_groups'] & node_groups).empty?
   end
 
   sudo username.delete('.') do # Filenames in /etc/sudoers.d that contain dots are ignored
@@ -64,8 +64,8 @@ users.each do |username, user_data|
   user_groups = user_data['groups'] || []
 
   ## The final OS groups list is user_groups plus groups named after the common user & node tags
-  user_node_tags = user_data['node_tags'] || []
-  all_groups = user_groups | (user_node_tags & node_tags)
+  user_node_groups = user_data['node_groups'] || []
+  all_groups = user_groups | (user_node_groups & node_groups)
 
   next if all_groups.empty? || user_data['action'] == 'remove'
 

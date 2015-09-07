@@ -86,7 +86,7 @@ shared_examples_for 'users override' do
     )
   end
 
-  it 'creates user newuser2 with sudo' do
+  it 'creates user newuser2 without sudo' do
     expect(chef_run).to create_user_account('newuser2')
     expect(chef_run).to modify_shadow_attributes('newuser2')
     expect(chef_run).to remove_sudo('newuser2')
@@ -109,6 +109,9 @@ shared_examples_for 'users override' do
       members: ['newuser1', 'newuser2']
     )
     expect(chef_run).to create_group('marketing').with(
+      members: ['newuser1', 'newuser2']
+    )
+    expect(chef_run).to create_group('staging').with(
       members: ['newuser1', 'newuser2']
     )
   end
