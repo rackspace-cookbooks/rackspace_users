@@ -1,6 +1,10 @@
 rackspace_users CHANGELOG
 =========================
 
+0.2.1
+-----
+- Fix cookbook description in metadata
+
 0.2.0
 -----
 - Default behaviour and membership changes
