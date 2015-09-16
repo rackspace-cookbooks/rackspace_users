@@ -17,7 +17,6 @@ A cookbook to manage users from an encrypted data bag.
 * `node['rackspace_users']['node_groups']` : An array of strings representing membership groups declared by the node calling the recipe. These are used to create users and grant sudo to them only on specific nodes. Defaults to `[]` (empty array).
 
 ## Usage
-
 The recipe reads the users from an *encrypted* data bag item. By default, looks for a data bag named `common` and an item called `users`. This can be overwritten in the consuming cookbook.
 After you define the users in the data bag, place a dependency on the rackspace_users cookbook in your cookbook's metadata.rb:
 ```
@@ -27,6 +26,17 @@ Then, in your recipe
 ```
 include_recipe 'rackspace_users'
 ```
+if you have unit tests in your consuming cookbook then you will also likely need to add the `ruby-shadow` gem to your `Gemfile`, something like this:
+```
+source 'https://rubygems.org'
+
+group :unit do
+  gem 'berkshelf'
+  gem 'chefspec'
+  gem 'ruby-shadow'
+end
+```
+
 ### In scope
  * Handle user creation, removal, modification and ssh keys. Leverages the `user_account` resource https://supermarket.chef.io/cookbooks/user
  * Handle account/password expiry information. Leverages the `user_shadow` resource https://supermarket.chef.io/cookbooks/user_shadow
@@ -35,7 +45,6 @@ include_recipe 'rackspace_users'
  * Provides a method of adding users and grant sudo only on specific nodes via attributes
 
 ### Overview
-
 The recipe logic is driven by user records in the data bag. Data bag name defaults to `common` and the item name to `users` but they can be overwritten.
 An example of a `users` data bag item:
 ```
