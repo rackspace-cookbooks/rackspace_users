@@ -244,6 +244,7 @@ On the `users` data bag item:
 ```
 
 Other scenarios can be potentially handled by having some logic in the recipe that creates/defines the string to be used in the `node['rackspace_users']['node_groups']` attribute. For instance if one wanted to create a user only on nodes with more than 2 CPU cores (because of some strange requirement) then they could potentially do something like this:
+
 On any node consuming `rackspace_users`:
 ```
 if node['cpu']['total'] > 2
@@ -255,7 +256,7 @@ node.default['rackspace_users']['node_groups'] = [ membership_based_on_number_of
 On the `users` data bag item:
 ```
 "user": {
-  "node_groups": [ 'cores_greater_than_2' ]
+  "node_groups": [ "cores_greater_than_2" ]
 }
 ```
 
