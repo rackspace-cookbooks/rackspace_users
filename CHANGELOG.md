@@ -1,6 +1,10 @@
 rackspace_users CHANGELOG
 =========================
 
+0.2.0
+-----
+- Default behaviour and membership changes
+
 0.1.2
 -----
 - Fix for group creation conditional
