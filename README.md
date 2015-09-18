@@ -27,6 +27,7 @@ Then, in your recipe
 include_recipe 'rackspace_users'
 ```
 if you have unit tests in your consuming cookbook then you will also likely need to add the `ruby-shadow` gem to your `Gemfile`, something like this:
+
 ```
 source 'https://rubygems.org'
 
@@ -47,6 +48,7 @@ end
 ### Overview
 The recipe logic is driven by user records in the data bag. Data bag name defaults to `common` and the item name to `users` but they can be overwritten.
 An example of a `users` data bag item:
+
 ```
 {
   "id": "users",
@@ -95,8 +97,10 @@ An example of a `users` data bag item:
   }
 }
 ```
+
 #### Adding users with basic configuration (no password expiry info, no sudo)
 The basic attribues of a user are named exactly as the parameters used by the `user_account` resource and can be added or omitted completely in which case default values are used. In fact users can be added by simply adding records like:
+
 ```
 {
   "id": "users",
@@ -105,7 +109,9 @@ The basic attribues of a user are named exactly as the parameters used by the `u
   "user3": {}
 }
 ```
+
 Here is an example with some basic attributes:
+
 ```
 {
   "id": "users",
@@ -127,10 +133,12 @@ Here is an example with some basic attributes:
   }
 }
 ```
+
 The above example also shows the usage of the `groups` array which is a list of Linux groups that the user will be granted membership. The group will be created if doesn't exist.
 
 #### Adding a user with password/account expiry information
 Password/account expiry information is set by adding attributes in the data bag named exactly as the parameters used by the `user_shadow` resource. Example:
+
 ```
 {
   "id": "users",
@@ -144,8 +152,10 @@ Password/account expiry information is set by adding attributes in the data bag 
   }
 }
 ```
+
 #### Creating users only on specific servers
 User creation on nodes can be controlled by declaring a list of groups on the node consuming the recipe and then subscribing the user to at least one of those groups in the data bag. The user will be created on the node if the user subscribes to at least one of the groups the node declares or if the user doesn't define them at all. Groups declaration on the node can be done in the consuming recipe, for example:
+
 
 ```
 node.default['rackspace_users']['node_groups'] = ['web', 'admin', 'test']
@@ -153,7 +163,9 @@ node.default['rackspace_users']['node_groups'] = ['web', 'admin', 'test']
 include_recipe 'rackspace_users'
 ```
 
+
 And then on the data bag the user can subscribe to one of the groups like:
+
 
 ```
 {
@@ -163,6 +175,7 @@ And then on the data bag the user can subscribe to one of the groups like:
   }
 }
 ```
+
 The recipe also creates Linux groups named after the `node_groups` that the user subscribes to *and* are also found in the node_groups list that the node declares. In the case above, the `admin` group will be created and the `newuser` will be granted membership on it. These Linux groups can be used in the future to grant privileges only to members of that groups if desired.
 
 It is worth emphasizing that this membership mechanism is an optional feature: if the node and user don't use it then the user will simply be created on all nodes consuming the recipe.
@@ -170,82 +183,113 @@ It is worth emphasizing that this membership mechanism is an optional feature: i
 More complex membership requirements can be handled by approprieatly naming the `node_groups` items. Here are some scenarios and how they can be implemented using this mechanism:
 
 ##### User must be on all servers regardless of role or environment:
+
 ```
 node_groups should not be defined for the user
 ```
+
 ##### User must be on all servers on environment `X`:
 On any node consuming `rackspace_users`:
+
 ```
 node.default['rackspace_users']['node_groups'] = [ node.chef_environment ]
 ```
+
 On the `users` data bag item:
+
 ```
 "user": {
   "node_groups": [ "X" ]
 }
 ```
+
 ##### User must be on all servers running role `X` on *any* environment:
 On the node with role `X`:
+
 ```
 node.default['rackspace_users']['node_groups'] = [ 'X' ]
 ```
+
 On the `users` data bag item:
+
 ```
 "user": {
   "node_groups": [ "X" ]
 }
 ```
+
 ##### User must be on all servers running role `X` *or* role `Y` on *any* environment:
 On the node with role `X`:
+
 ```
 node.default['rackspace_users']['node_groups'] = [ 'X' ]
 ```
+
 On the node with role `Y`:
+
 ```
 node.default['rackspace_users']['node_groups'] = [ 'Y' ]
 ```
+
 On the `users` data bag item:
+
 ```
 "user": {
   "node_groups": [ "X" , "Y" ]
 }
 ```
+
 ##### User must be on all servers running role `X` *only* on environment `Y`:
 On the node with role `X`:
+
 ```
 node.default['rackspace_users'] = [ "X_#{node.chef_environment}" ]
 ```
+
 On the `users` data bag item:
+
 ```
 "user": {
   "node_groups": [ "X_Y" ]
 }
 ```
+
 ##### User must be on all servers running role `X` *or* role `Y` *only* on environment `Z`:
 On the node with role `X`:
+
 ```
 node.default['rackspace_users']['node_groups'] = [ "X_#{node.chef_environment}" ]
 ```
+
 On the node with role `Y`:
+
 ```
 node.default['rackspace_users']['node_groups'] = [ "Y_#{node.chef_environment}" ]
 ```
+
 On the `users` data bag item:
+
 ```
 "user": {
   "node_groups": [ "X_Z" , "Y_Z" ]
 }
 ```
+
 ##### User must be on all servers running role `X` *only* on environment `Y` and servers running role `Z` but *only* on environment `K`:
 On the node with role `X`:
+
 ```
 node.default['rackspace_users']['node_groups'] = [ "X_#{node.chef_environment}" ]
 ```
+
 On the node with role `Z`:
+
 ```
 node.default['rackspace_users']['node_groups'] = [ "Z_#{node.chef_environment}" ]
 ```
+
 On the `users` data bag item:
+
 ```
 "user": {
   "node_groups": [ "X_Y" , "Z_K" ]
@@ -255,6 +299,7 @@ On the `users` data bag item:
 Other scenarios can be potentially handled by having some logic in the recipe that creates/defines the string to be used in the `node['rackspace_users']['node_groups']` attribute. For instance if one wanted to create a user only on nodes with more than 2 CPU cores (because of some strange requirement) then they could potentially do something like this:
 
 On any node consuming `rackspace_users`:
+
 ```
 if node['cpu']['total'] > 2
   membership_based_on_number_of_cores = 'cores_greater_than_2'
@@ -262,7 +307,9 @@ end
 
 node.default['rackspace_users']['node_groups'] = [ membership_based_on_number_of_cores ]
 ```
+
 On the `users` data bag item:
+
 ```
 "user": {
   "node_groups": [ "cores_greater_than_2" ]
@@ -272,6 +319,7 @@ On the `users` data bag item:
 #### Sudo
 
 'Sudo as root' can simply be added by adding an empty `sudo` section:
+
 ```
 {
   "id": "users",
@@ -280,7 +328,9 @@ On the `users` data bag item:
   }
 }
 ```
+
 This will add a `/etc/sudoers.d/newuser` file with privileges allowing the user to execute any command as root. The user will have to enter their password. The recipe uses the `sudo` resource and some features of that can be overwritten, namely `nopasswd`, `commands` and `defaults`. For example:
+
 ```
 {
   "id": "users",
@@ -299,7 +349,9 @@ This will add a `/etc/sudoers.d/newuser` file with privileges allowing the user 
   }
 }
 ```
+
 If there is no `sudo` section, a sudo entry will not be added for that user. Sudo creation can be controlled even further by again using the `node_groups` mechanism. If the `sudo` section has a `node_groups` sub section then that will be compared against the `node_groups` the node declares. If no common items are found then a sudo entry will not be added. For example:
+
 ```
 {
   "id": "users",
@@ -310,10 +362,12 @@ If there is no `sudo` section, a sudo entry will not be added for that user. Sud
   }
 }
 ```
+
 Also note that if the user doesn't declare `node_groups` under the sudo section then it is assumed that it has sudo on all nodes.
 
 #### Using a different data bag
 You can point to a different data bag and item by overwriting the corresponding attributes in the consuming cookbook, for example:
+
 ```
 # override default data bag and item
 node.default['rackspace_users']['data_bag'] = 'my_data_bag'
