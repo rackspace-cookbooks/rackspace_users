@@ -1,6 +1,10 @@
 rackspace_users CHANGELOG
 =========================
 
+0.2.2
+-----
+- Fixed README
+
 0.2.1
 -----
 - Fix cookbook description in metadata
