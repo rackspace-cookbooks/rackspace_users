@@ -23,6 +23,10 @@ shared_examples_for 'users' do
     it { should belong_to_group 'newuser1' }
   end
 
+  describe file('/etc/sudoers.d/newuser1') do
+    its(:content) { should match(/newuser1 ALL=\(ALL\) ALL/) }
+  end
+
   # newuser2
   describe group('newgroup') do
     it { should exist }
@@ -101,7 +105,7 @@ shared_examples_for 'users override' do
 
   describe file('/etc/sudoers.d/newuser1') do
     it { should exist }
-    its(:content) { should match(/newuser1 ALL=\(root\) ALL/) }
+    its(:content) { should match(/newuser1 ALL=\(ALL\) ALL/) }
   end
 
   # newuser2

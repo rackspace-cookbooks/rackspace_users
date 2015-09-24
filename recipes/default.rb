@@ -52,7 +52,7 @@ users.each do |username, user_data|
 
   sudo username.delete('.') do # Filenames in /etc/sudoers.d that contain dots are ignored
     user username
-    runas 'root'
+    runas user_data['sudo']['runas'] if user_data['sudo'] && user_data['sudo']['runas']
     nopasswd user_data['sudo']['nopasswd'] if user_data['sudo'] && user_data['sudo']['nopasswd']
     commands user_data['sudo']['commands'] if user_data['sudo'] && user_data['sudo']['commands']
     defaults user_data['sudo']['defaults'] if user_data['sudo'] && user_data['sudo']['defaults']
