@@ -1,6 +1,10 @@
 rackspace_users CHANGELOG
 =========================
 
+0.2.3
+-----
+- Sudo 'runas' now defaults to 'ALL' and is configurable via the data bag
+
 0.2.2
 -----
 - Fixed README
