@@ -25,7 +25,7 @@ shared_examples_for 'users' do
     expect(chef_run).to modify_shadow_attributes('newuser1')
     expect(chef_run).to install_sudo('newuser1').with(
       user: 'newuser1',
-      runas: 'root',
+      runas: 'ALL',
       nopasswd: false
     )
   end
@@ -81,7 +81,7 @@ shared_examples_for 'users override' do
     expect(chef_run).to modify_shadow_attributes('newuser1')
     expect(chef_run).to install_sudo('newuser1').with(
       user: 'newuser1',
-      runas: 'root',
+      runas: 'ALL',
       nopasswd: false
     )
   end

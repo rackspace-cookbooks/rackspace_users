@@ -329,7 +329,7 @@ On the `users` data bag item:
 }
 ```
 
-This will add a `/etc/sudoers.d/newuser` file with privileges allowing the user to execute any command as root. The user will have to enter their password. The recipe uses the `sudo` resource and some features of that can be overwritten, namely `nopasswd`, `commands` and `defaults`. For example:
+This will add a `/etc/sudoers.d/newuser` file with privileges allowing the user to execute any command as root. The user will have to enter their password. The recipe uses the `sudo` resource and some features of that can be overwritten, namely `nopasswd`, `commands`, `runas` and `defaults`. For example:
 
 ```
 {

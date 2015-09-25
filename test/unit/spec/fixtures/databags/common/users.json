@@ -1,6 +1,7 @@
 {
   "id": "users",
   "testuser": {
+
   },
   "newuser1": {
     "sudo": {
@@ -30,6 +31,7 @@
     "sp_warn": 5,
     "sudo": {
       "nopasswd": true,
+      "runas": "root",
       "commands": [
         "/etc/init.d/httpd restart",
         "/sbin/iptables"
