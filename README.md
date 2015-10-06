@@ -39,11 +39,11 @@ end
 ```
 
 ### In scope
- * Handle user creation, removal, modification and ssh keys. Leverages the `user_account` resource https://supermarket.chef.io/cookbooks/user
- * Handle account/password expiry information. Leverages the `user_shadow` resource https://supermarket.chef.io/cookbooks/user_shadow
- * Handle "sudo as root" entries. Leverages the `sudo` resource https://supermarket.chef.io/cookbooks/sudo
- * Add user to groups
- * Provides a method of adding users and grant sudo only on specific nodes via attributes
+ * Handles user creation, removal, modification and ssh keys. Leverages the `user_account` resource https://supermarket.chef.io/cookbooks/user
+ * Handles account/password expiry information. Leverages the `user_shadow` resource https://supermarket.chef.io/cookbooks/user_shadow
+ * Handles a basic sudo entry for each user. Leverages the `sudo` resource https://supermarket.chef.io/cookbooks/sudo
+ * Handles Linux group membership for users
+ * Provides a membership method for adding users and grant sudo only on specific nodes
 
 ### Overview
 The recipe logic is driven by user records in the data bag. Data bag name defaults to `common` and the item name to `users` but they can be overwritten.
@@ -318,7 +318,7 @@ On the `users` data bag item:
 
 #### Sudo
 
-'Sudo as root' can simply be added by adding an empty `sudo` section:
+A basic sudo entry can be created by adding an empty `sudo` section:
 
 ```
 {
@@ -329,7 +329,7 @@ On the `users` data bag item:
 }
 ```
 
-This will add a `/etc/sudoers.d/newuser` file with privileges allowing the user to execute any command as root. The user will have to enter their password. The recipe uses the `sudo` resource and some features of that can be overwritten, namely `nopasswd`, `commands`, `runas` and `defaults`. For example:
+This will add a `/etc/sudoers.d/newuser` file with privileges allowing the user to execute any command as `ALL` by entering their password (the default of the sudo resource). The user will have to enter their password. The recipe uses the `sudo` resource and some features of that can be overwritten, namely `nopasswd`, `commands`, `runas` and `defaults`. For example:
 
 ```
 {
