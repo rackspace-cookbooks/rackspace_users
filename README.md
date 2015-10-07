@@ -6,7 +6,7 @@ A cookbook to manage users from an encrypted data bag.
 
 ## Supported Platforms
 
-* Centos 6.6
+* Centos 6.7
 * Ubuntu 12.04
 * Ubuntu 14.04
 
