@@ -1,6 +1,10 @@
 rackspace_users CHANGELOG
 =========================
 
+0.2.6
+-----
+- Pin upstream cookbooks
+
 0.2.5
 -----
 - Support for CentOS 6.7 instead of 6.6

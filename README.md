@@ -10,6 +10,14 @@ A cookbook to manage users from an encrypted data bag.
 * Ubuntu 12.04
 * Ubuntu 14.04
 
+## Dependencies
+
+* https://supermarket.chef.io/cookbooks/user
+* https://supermarket.chef.io/cookbooks/user_shadow
+* https://supermarket.chef.io/cookbooks/sudo
+
+Upstream dependencies are pinned to good known versions.
+
 ## Attributes
 
 * `node['rackspace_users']['data_bag']` : Which data bag contains the item with user records. Defaults to `common`
