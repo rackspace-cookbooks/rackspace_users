@@ -1,6 +1,10 @@
 rackspace_users CHANGELOG
 =========================
 
+0.2.7
+-----
+- Use pessimistic version when pinning
+
 0.2.6
 -----
 - Pin upstream cookbooks
