@@ -137,7 +137,7 @@ Here is an example with some basic attributes:
     ],
     "groups": [
       "newgroup2"
-    ],
+    ]
   }
 }
 ```
