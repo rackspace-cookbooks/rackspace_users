@@ -1,6 +1,14 @@
 rackspace_users CHANGELOG
 =========================
 
+0.2.8
+-----
+- Updated README
+- Fixed Rubocop errors
+- Fixed circleci ssh key issue
+- Added Gemfile.lock to repo
+- Changed CentOS 6.6 to 6.7 in unit tests
+
 0.2.7
 -----
 - Use pessimistic version when pinning
