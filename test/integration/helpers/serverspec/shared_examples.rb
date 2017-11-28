@@ -128,7 +128,7 @@ shared_examples_for 'users override' do
   end
 
   # Groups
-  %w(web marketing facilities staging).each do |group|
+  %w[web marketing facilities staging].each do |group|
     describe group(group) do
       it { should exist }
     end

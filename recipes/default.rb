@@ -13,7 +13,8 @@
 
 users = Chef::EncryptedDataBagItem.load(
   node['rackspace_users']['data_bag'],
-  node['rackspace_users']['data_bag_item']).to_hash.select { |user, user_data| user != 'id' }
+  node['rackspace_users']['data_bag_item']
+).to_hash.reject { |user, user_data| user == 'id' }
 
 node_groups = node['rackspace_users']['node_groups']
 
@@ -28,13 +29,13 @@ users.each do |username, user_data|
   user_account username do
     manage_home user_data['manage_home'] || true
     shell user_data['shell'] || '/bin/bash'
-    %w(comment uid gid home password system_user create_group ssh_keys ssh_keygen non_unique action).each do |param|
+    %w[comment uid gid home password system_user create_group ssh_keys ssh_keygen non_unique action].each do |param|
       send(param, user_data[param]) if user_data[param]
     end
   end
 
   user_shadow username do
-    %w(sp_lstchg sp_expire sp_min sp_max sp_inact sp_warn).each do |param|
+    %w[sp_lstchg sp_expire sp_min sp_max sp_inact sp_warn].each do |param|
       send(param, user_data[param]) if user_data[param]
     end
     only_if { user_data['action'] != 'remove' }

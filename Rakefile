@@ -12,9 +12,8 @@ namespace :style do
   desc 'Run Chef style checks'
   FoodCritic::Rake::LintTask.new(:chef) do |t|
     t.options = { search_gems: true,
-                  tags: %w(~rackspace-support),
-                  fail_tags: %w(correctness,rackspace)
-                }
+                  tags: %w[~rackspace-support],
+                  fail_tags: %w[correctness,rackspace] }
   end
 end
 
@@ -39,7 +38,7 @@ namespace :integration do
     end
   end
 
-  %w(verify destroy).each do |t|
+  %w[verify destroy].each do |t|
     desc "Run kitchen #{t} with cloud plugins"
     namespace :cloud do
       task t do

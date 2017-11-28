@@ -1,15 +1,14 @@
 source 'https://rubygems.org'
 
 group :lint do
-  gem 'foodcritic'
-  gem 'foodcritic-rackspace-rules'
-  gem 'rubocop', '~> 0.24'
+  gem 'cookstyle'
+  gem 'foodcritic', '~> 6.0'
 end
 
 group :unit do
-  gem 'berkshelf', '~> 4'
-  gem 'chefspec'
+  gem 'berkshelf', '~> 5.0'
   gem 'chef-sugar'
+  gem 'chefspec'
   gem 'ruby-shadow'
 end
 
@@ -27,11 +26,16 @@ group :kitchen_rackspace do
 end
 
 group :development do
-  gem 'stove', '= 3.2.5'
   gem 'growl'
-  gem 'rb-fsevent'
   gem 'guard'
-  gem 'guard-kitchen'
   gem 'guard-foodcritic'
+  gem 'guard-kitchen'
   gem 'guard-rubocop'
+  gem 'rb-fsevent'
+  gem 'stove', '= 3.2.5'
+end
+
+group :vulnerable_versions do
+  gem 'minitar', '~> 0.6'
+  gem 'yajl-ruby', '>= 1.3.1'
 end

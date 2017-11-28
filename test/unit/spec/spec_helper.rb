@@ -4,8 +4,7 @@ require_relative 'rackspace_users_shared'
 
 ::LOG_LEVEL = ENV['CHEFSPEC_LOG_LEVEL'] ? ENV['CHEFSPEC_LOG_LEVEL'].to_sym : :fatal
 
-def stub_commands
-end
+def stub_commands; end
 
 def stub_databags
   allow(Chef::EncryptedDataBagItem).to receive(:load).with('common', 'users').and_return(fixtures_databags('common', 'users'))
